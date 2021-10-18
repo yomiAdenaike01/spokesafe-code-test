@@ -24,7 +24,7 @@ export class UserRouter implements IRouter {
   startRoutes(): void {
     this.router.get("/me", (req, res, next) => {
       userController
-        .getUserById("616dc7afe54ec823e1c447de")
+        .getUserById(req.headers.user_id as string)
         .then((x) => {
           res.status(200).json(x);
         })

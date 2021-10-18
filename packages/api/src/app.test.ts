@@ -16,9 +16,10 @@ const app = new Application([
 ]);
 let bookingId = "";
 describe("App test", () => {
+  let userId = "";
   beforeAll(async () => {
     await dbManager.connectToTestDatabase();
-    const userId = await userController.createTestUser();
+    userId = await userController.createTestUser();
     bookingId = await bookingController.scheduleBooking(
       userId,
       new Date(),
@@ -28,6 +29,8 @@ describe("App test", () => {
   test("GET /me", async () => {
     await request(app.getExpress())
       .get("/users/me")
+      .send({ user_id: userId })
+      .set("user_id", userId)
       .expect(200)
       .then((response) => {
         expect.assertions(5);
@@ -56,7 +59,7 @@ describe("App test", () => {
     await request(app.getExpress())
       .post("/bookings")
       .send({
-        user_id: "616d8596d5111722a5199f08",
+        user_id: userId,
         start: +new Date(),
         end: +add(new Date(), { hours: 3 }),
       })
