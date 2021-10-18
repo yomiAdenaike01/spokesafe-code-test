@@ -1,0 +1,39 @@
+{
+  "name": "@spokesafe/api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Yomi Adenaike",
+  "license": "MIT",
+  "scripts": {
+    "start:dev": "nodemon ./src/app.ts",
+    "build": "tsc",
+    "test": "yarn jest --runInBand"
+  },
+  "dependencies": {
+    "@spokesafe/types": "1.0.0",
+    "@typegoose/typegoose": "^9.2.0",
+    "cors": "^2.8.5",
+    "date-fns": "^2.25.0",
+    "express": "^4.17.1",
+    "faker": "^5.5.3",
+    "jest": "^27.3.0",
+    "mongoose": "^6.0.11",
+    "morgan": "^1.10.0",
+    "supertest": "^6.1.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.12",
+    "@types/date-fns": "^2.6.0",
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.13",
+    "@types/faker": "^5.5.9",
+    "@types/jest": "^27.0.2",
+    "@types/morgan": "^1.9.3",
+    "@types/supertest": "^2.0.11",
+    "nodemon": "^2.0.13",
+    "supertest": "^6.1.6",
+    "ts-jest": "^27.0.7",
+    "ts-node": "^10.3.0",
+    "typescript": "^4.4.4"
+  }
+}

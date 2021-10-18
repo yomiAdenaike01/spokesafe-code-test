@@ -1,0 +1,8 @@
+{
+  "name": "@spokesafe/types",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "author": "Yomi Adenaike",
+  "license": "MIT",
+  "types": "dist/index.d.ts"
+}
