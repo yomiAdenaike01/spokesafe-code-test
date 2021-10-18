@@ -18,7 +18,7 @@ describe("[booking-controller-test]", () => {
   afterAll(async () => {
     dbManager.disconnectFromDatabase();
   });
-  it("should get all bookings", async () => {
+  it("should get all bookings or return an empty array", async () => {
     const bookings = await bookingController.getBookings();
     expect(bookings).toBeDefined();
     expect(bookings.length).toBeGreaterThan(0);

@@ -11,7 +11,7 @@ class BookingController {
   async getBookings() {
     try {
       const res = await BookingModel.find().lean();
-      return res;
+      return res && res[0] ? res : [];
     } catch (error) {
       throw new InternalServerErrorExecption("Failed to get bookings", error);
     }
