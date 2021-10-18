@@ -1,7 +1,7 @@
 
 # Spokesafe-code-test
 
-# Instructions 
+# Instructions Total duration (3hrs 10mins)
 - Clone the repo onto your local machine.
 - Run **yarn** or **npm i** or **npm install**  in the root of the directory that should install all the dependencies
 - add a .env file to the following path **./packages/api** add a mongo db url under the MONGO_URL key.
