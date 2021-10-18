@@ -16,7 +16,7 @@ describe("[booking-controller-test]", () => {
   });
   // Remove database and remove users
   afterAll(async () => {
-    dbManager.disconnectFromDatabase();
+    await dbManager.disconnectFromDatabase();
   });
   it("should get all bookings or return an empty array", async () => {
     const bookings = await bookingController.getBookings();

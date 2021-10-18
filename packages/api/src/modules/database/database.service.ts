@@ -1,9 +1,11 @@
-import { connect, disconnect, connection } from "mongoose";
+import mongoose, { connect, connection } from "mongoose";
 import { GlobalException } from "../../utils/exceptions/global.exception";
 import dotenv from "dotenv";
 export class DatabaseManager {
+  connection: typeof mongoose | null;
   constructor() {
     dotenv.config();
+    this.connection = null;
   }
   /**
    * @description Connects to database based on name
@@ -11,14 +13,15 @@ export class DatabaseManager {
    */
   async connectToDatabase() {
     try {
-      await connect(process.env.MONGO_URL as string);
+      this.connection = await connect(process.env.MONGO_URL as string);
     } catch (error) {
       throw new GlobalException("Failed to connect to database", 0, error);
     }
   }
   async disconnectFromDatabase() {
     try {
-      disconnect();
+      await this.connection?.disconnect();
+      await connection.close();
     } catch (error) {
       throw new Error(error as any);
     }

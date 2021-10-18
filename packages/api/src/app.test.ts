@@ -15,7 +15,7 @@ const app = new Application([
   new RouteMap(userRouter.getURL(), userRouter.getRouter()),
 ]);
 let bookingId = "";
-describe("App test", () => {
+describe("ENDPOINT TESTING", () => {
   let userId = "";
   beforeAll(async () => {
     await dbManager.connectToTestDatabase();
@@ -26,8 +26,11 @@ describe("App test", () => {
       add(new Date(), { minutes: 10 })
     );
   });
-  test("GET /me", async () => {
-    await request(app.getExpress())
+  afterAll(async () => {
+    await dbManager.disconnectFromDatabase();
+  });
+  test("GET /me", (done) => {
+    request(app.getExpress())
       .get("/users/me")
       .send({ user_id: userId })
       .set("user_id", userId)
@@ -40,11 +43,11 @@ describe("App test", () => {
         expect(response.body.lname).toBeDefined();
         expect(response.body._id).toBeDefined();
         expect(response.body.email).toBeDefined();
-        return Promise.resolve();
+        done();
       });
   });
-  test("GET /bookings", async () => {
-    await request(app.getExpress())
+  test("GET /bookings", (done) => {
+    request(app.getExpress())
       .get("/bookings")
       .expect(200)
       .then((response) => {
@@ -52,11 +55,11 @@ describe("App test", () => {
         // Check the response type and length
         expect(response.body).toBeDefined();
         expect(Array.isArray(response.body)).toBeTruthy();
-        return Promise.resolve();
+        done();
       });
   });
-  test("POST /bookings", async () => {
-    await request(app.getExpress())
+  test("POST /bookings", (done) => {
+    request(app.getExpress())
       .post("/bookings")
       .send({
         user_id: userId,
@@ -68,21 +71,21 @@ describe("App test", () => {
         // Check the response type and length
         expect(response.body).toBeDefined();
         expect(response.body.length).toBeGreaterThan(0);
-        return Promise.resolve();
+        done();
       });
   });
-  test("PATCH /bookings", async () => {
-    await request(app.getExpress())
+  test("PATCH /bookings", (done) => {
+    request(app.getExpress())
       .patch("/bookings")
       .expect(200)
       .then((response) => {
         // Check the response type and length
         expect(response.body).toBeTruthy();
-        return Promise.resolve();
+        done();
       });
   });
-  test("POST /bookings/cancel", async () => {
-    await request(app.getExpress())
+  test("POST /bookings/cancel", (done) => {
+    request(app.getExpress())
       .post("/bookings/cancel")
       .send({ booking_id: bookingId })
       .expect(200)
@@ -94,7 +97,7 @@ describe("App test", () => {
         expect(response.body.credits).toBeDefined();
 
         expect(typeof response.body === "object").toBeTruthy();
-        return Promise.resolve();
+        done();
       });
   });
 });

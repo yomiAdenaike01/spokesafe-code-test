@@ -13,7 +13,7 @@ describe("complete booking and credit users account", () => {
   // Remove database and remove users
   afterAll(async () => {
     await userController.deleteUser(userId);
-    dbManager.disconnectFromDatabase();
+    await dbManager.disconnectFromDatabase();
   });
 
   it("should add credits to the users account", async () => {
